@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>卡片记忆大师</title>
+<script src="jquery.min.js"></script>
+<script src="g.js"></script>
+<script>
+	$(function(){
+		rule=new Rule();
+	});
+	$(document).on("click",".card",function(){
+		var result=rule.click($(this).attr("x"),$(this).attr("y"));
+		rule.refresh();
+		switch(result){
+			case -2:$('#msg').html('现在不能点哦');break;
+			case -1:$('#msg').html('已经点过了哦');break;
+			case 1:$('#msg').html('记住哦');break;
+			case 2:$('#msg').html('太棒了');break;
+			case 3:$('#msg').html('好遗憾');break;
+			case 4:$('#msg').html('恭喜你完成啦');break;
+		}
+	});
+	$(document).on("click","#reset",function(){
+		rule.init(2,2,2,2,1000);
+		rule.refresh();
+		$('#msg').html('');
+	});
+	//刷新
+	
+</script>
+<style>
+</style>
+</head>
+<body>
+<div id='g' style="width:50%;min-height:200px;;margin-left: auto;margin-right: auto;">
+	卡片显示区
+</div>
+<div style="position:fixed;top:10%;right:10%;"><span id='msg' style="display:block;"></span><button id='reset'>重置</button></div>
+
+</body>
+</html>
